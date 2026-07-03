@@ -147,6 +147,131 @@ ggplot(data = dados) +
 
 
 ```{r}
+# Adicionando outro geom 
+# geom_line x geom_smooth
+ggplot(data = dados) +
+  geom_point(aes(x = LucroLocal, y = LucroMundial),
+             color = "#3d405b", shape = 16, size = 1)
+```
+
+
+```{r}
+ggplot(data = dados) +
+  geom_point(aes(x = LucroLocal, y = LucroMundial), color = "#3d405b",
+             shape = 16, size = .7) +
+  geom_line(aes(x = LucroLocal, y = LucroMundial), stat = "smooth")
+```
+
+
+```{r}
+ggplot(
+  data = dados)+
+  geom_point(aes(x = LucroLocal, y = LucroMundial),
+             color = "#8c1c13", fill = "black", shape = 25, size = 0.7) +
+  geom_smooth(aes(x = LucroLocal, y = LucroMundial), method = "lm")
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
 ```
 
 
