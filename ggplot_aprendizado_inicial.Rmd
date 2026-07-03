@@ -1,0 +1,167 @@
+```{r}
+if(!require(pacman)){install.packages("pacman")}
+pacman::p_load(ggplot2, dplyr)
+```
+
+
+```{r}
+dados <- read.csv2("LucroFilmes.csv", stringsAsFactors = T)
+glimpse(dados)
+View(dados)
+```
+
+
+```{r}
+# Modificando DataLançamento para o formato data
+dados$DataLancamento <- as.Date(dados$DataLancamento, format = "%m/%d/%Y")
+```
+
+
+```{r}
+# Salvando o mês e o ano em colunas separadas
+dados <- dados |> mutate(AnoLancamento = format(DataLancamento, "%Y"))
+dados <- dados |> mutate(MesLancamento = format(DataLancamento, "%m"))
+```
+
+
+```{r}
+# Entendendo a lógica das camadas do ggplot2
+# As três principais camadas: dados (data), estética (aes), geom
+# O aes pode ser definido na camada ggplot ou na geom 
+
+# Na camada geom
+ggplot(
+  data = dados,
+)+
+  geom_point(aes(
+    x = LucroLocal, y = LucroMundial))
+
+# Na camada ggplot
+ggplot(
+  data = dados,
+  aes(
+    x = LucroLocal,
+    y = LucroMundial
+  )
+) +
+  geom_point()
+```
+
+
+```{r}
+# Possibilidades de camadas e geom_: https://ggplot2.tidyverse.org/reference/
+# Paletas de cores: https://coolors.co/
+```
+
+
+```{r}
+# Histograma (Orçamentos de produção)
+ggplot(data = dados) +
+  geom_histogram(aes(x = Orcamento))
+```
+
+
+```{r}
+# Grafico de Barras (Quantidade de filmes por gênero)
+ggplot(
+  data = dados) +
+  geom_bar(aes(x = Genero, y = ..count..))
+```
+
+
+```{r}
+# Boxplot (Lucro mundial por gênero)
+ggplot(data = dados) +
+  geom_boxplot(aes(x = Genero, y = LucroMundial))
+```
+
+
+```{r}
+# Linhas (Quantidade de filmes por ano)
+ggplot(data = dados)+
+  geom_line(aes(x = AnoLancamento, group = 1), stat = 'count')
+```
+
+```{r}
+## Modificando argumentos dentro do geom (color, shape, size)
+# A diferença entre usá-los dentro ou fora do aes
+# (Color)
+ggplot(data = dados) +
+  geom_point(aes(x = LucroLocal, y = LucroMundial, color = Genero))
+```
+
+
+```{r}
+# (Shape)
+ggplot(data = dados) +
+  geom_point(aes(x = LucroLocal,
+                 y = LucroMundial,
+                 color = Genero,
+                 shape = Genero))
+```
+
+
+```{r}
+# (Size)
+ggplot(data = dados) +
+  geom_point(aes(x = LucroLocal,
+                 y = LucroMundial,
+                 color = Genero,
+                 shape = Genero,
+                 size = Orcamento))
+```
+
+
+```{r}
+# Alteração de colors
+# Cores pré-definidas no R: http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf
+ggplot(data = dados) +
+  geom_point(aes(x = LucroLocal,
+                 y = LucroMundial,
+                 shape = Genero), color = "darkred")
+```
+
+
+```{r}
+# Site gerador de paletas: https://coolors.co/
+ggplot(data = dados) +
+  geom_point(aes(x = LucroLocal,
+                 y = LucroMundial,
+                 shape = Genero), color = "#2f0708")
+```
+
+
+```{r}
+# Shapes possiveis: https://www.sthda.com/english/wiki/r-plot-pch-symbols-the-different-point-shapes-available-in-r
+
+ggplot(data = dados)+
+  geom_point(aes(x = LucroLocal, y = LucroMundial), shape = 18, color = '#2f0708')
+```
+
+
+```{r}
+ggplot(data = dados) +
+  geom_point(aes(x = LucroLocal, y = LucroMundial), fill = "#61988a",
+             color = "black", shape = 25, size = .4)
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
