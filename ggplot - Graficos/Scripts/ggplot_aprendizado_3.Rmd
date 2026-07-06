@@ -1,0 +1,118 @@
+```{r}
+if(!require(pacman))install.packages("pacman")
+pacman::p_load(ggplot2, dplyr, scales, ggpubr)
+```
+
+
+```{r}
+dados <- read.csv2("LucroFilmes.csv", stringsAsFactors = T)
+glimpse(dados)
+View(dados)
+```
+```{r}
+dados |> filter(Classificacao %in% c("PG", "PG-13", "R")) |> 
+ggplot(aes(x = Genero, y = LucroLocal, color = Classificacao)) +
+  geom_point(stat = "summary", fun = "mean", position = position_dodge(.4)) +
+  geom_errorbar(stat = "summary", fun.data = "mean_ci", width = 0.2,
+                position = position_dodge(.4)) +
+  labs(y = "Lucro Local(US$)", X = "Gênero do filme", color = "Classificação")
+```
+
+
+```{r}
+gm <- dados |> filter(Classificacao %in% c("PG", "PG-13", "R")) |> 
+ggplot(aes(x = Genero, y = LucroLocal, color = Classificacao)) +
+  geom_point(stat = "summary", fun = "mean", position = position_dodge(.4)) +
+  geom_errorbar(stat = "summary", fun.data = "mean_ci", width = 0.2,
+                position = position_dodge(.4)) +
+  labs(y = "Lucro Local(US$)", X = "Gênero do filme", color = "Classificação")
+```
+
+
+```{r}
+gm + coord_cartesian(ylim = c(0,100000000))
+```
+
+
+```{r}
+gm + scale_y_continuous(limits = c(0,100000000))
+```
+
+
+```{r}
+gb <- ggplot(data = dados) +
+  geom_bar(aes(x = Genero, y = ..count.., fill = Genero), show.legend = F)+
+  labs(y = "Quantidade de Filmes", x = "Gênero")
+```
+
+
+```{r}
+dados |> filter(Classificacao %in% c("PG", "PG-13", "R")) |> 
+ggplot(aes(x = Genero, y = LucroLocal, color = Classificacao)) +
+  geom_point(stat = "summary", fun = "mean", position = position_dodge(.4)) +
+  geom_errorbar(stat = "summary", fun.data = "mean_ci", width = 0.2,
+                position = position_dodge(.4)) +
+  labs(y = "Lucro Local(US$)", X = "Gênero do filme", color = "Classificação",
+       title = "Lucro local em US$, de acordo com o gênero e classificação do filme",
+       subtitle = "Dados representados como média e IC 95%",
+       caption = "Fonte: FiveThirtyEight")+
+  facet_grid(~ Classificacao)
+```
+
+
+```{r}
+gb + facet_grid(~ Classificacao)
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
