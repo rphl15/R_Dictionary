@@ -173,37 +173,87 @@ ggplot(
 
 
 ```{r}
+ggplot(data = dados, aes(x = Genero, y = LucroLocal)) +
+  geom_point(stat = "summary", fun = "mean") +
+  geom_errorbar(stat = "summary", fun.data = "mean_se", width = 0.3)
 ```
 
 
 ```{r}
+ggplot(data = dados, aes(x = Genero, y = LucroLocal)) +
+  geom_point(stat = "summary", fun = "mean") +
+  geom_errorbar(stat = "summary", fun.min = "min", fun.max = "max", width = 0.3)
 ```
 
 ```{r}
-```
-
-
-```{r}
-```
-
-
-```{r}
-```
-
-
-```{r}
+pacman::p_load(ggpubr)
+ggplot(data = dados, aes(x = Genero, y = LucroLocal)) +
+  geom_point(stat = "summary", fun = "mean") +
+  geom_errorbar(stat = "summary", fun.data = "mean_sd", width = 0.2)
 ```
 
 
 ```{r}
+ggplot(data = dados, aes(x = Genero, y = LucroLocal)) +
+  geom_point(stat = "summary", fun = "mean") +
+  geom_errorbar(stat = "summary", fun.data = "mean_ci", width = 0.2)
 ```
 
 
 ```{r}
+dados |> filter(Classificacao %in% c("PG", "PG-13", "R")) |> 
+ggplot(aes(x = Genero, y = LucroLocal)) +
+  geom_point(stat = "summary", fun = "mean") +
+  geom_errorbar(stat = "summary", fun.data = "mean_ci", width = 0.2)
+```
+```{r}
+dados |> filter(Classificacao %in% c("PG", "PG-13", "R")) |> 
+ggplot(aes(x = Genero, y = LucroLocal, color = Classificacao)) +
+  geom_point(stat = "summary", fun = "mean") +
+  geom_errorbar(stat = "summary", fun.data = "mean_ci", width = 0.2)
 ```
 
 
 ```{r}
+dados |> filter(Classificacao %in% c("PG", "PG-13", "R")) |> 
+ggplot(aes(x = Genero, y = LucroLocal, color = Classificacao)) +
+  geom_point(stat = "summary", fun = "mean", position = position_dodge(.4)) +
+  geom_errorbar(stat = "summary", fun.data = "mean_ci", width = 0.2,
+                position = position_dodge(.4))
+```
+
+
+```{r}
+dados |> filter(Classificacao %in% c("PG", "PG-13", "R")) |> 
+ggplot(aes(x = Genero, y = LucroLocal, color = Classificacao)) +
+  geom_point(stat = "summary", fun = "mean", position = position_dodge(.4)) +
+  geom_errorbar(stat = "summary", fun.data = "mean_ci", width = 0.2,
+                position = position_dodge(.4)) +
+  labs(y = "Lucro Local(US$)", X = "Gênero do filme", color = "Classificação")
+```
+
+
+```{r}
+dados |> filter(Classificacao %in% c("PG", "PG-13", "R")) |> 
+ggplot(aes(x = Genero, y = LucroLocal, color = Classificacao)) +
+  geom_point(stat = "summary", fun = "mean", position = position_dodge(.4)) +
+  geom_errorbar(stat = "summary", fun.data = "mean_ci", width = 0.2,
+                position = position_dodge(.4)) +
+  labs(y = "Lucro Local(US$)", X = "Gênero do filme", color = "Classificação",
+       title = "Lucro local em US$, de acordo com o gênero e classificação do filme")
+```
+
+
+```{r}
+dados |> filter(Classificacao %in% c("PG", "PG-13", "R")) |> 
+ggplot(aes(x = Genero, y = LucroLocal, color = Classificacao)) +
+  geom_point(stat = "summary", fun = "mean", position = position_dodge(.4)) +
+  geom_errorbar(stat = "summary", fun.data = "mean_ci", width = 0.2,
+                position = position_dodge(.4)) +
+  labs(y = "Lucro Local(US$)", X = "Gênero do filme", color = "Classificação",
+       title = "Lucro local em US$, de acordo com o gênero e classificação do filme",
+       subtitle = "Dados representados como média e IC 95%",
+       caption = "Fonte: FiveThirtyEight")
 ```
 
 
